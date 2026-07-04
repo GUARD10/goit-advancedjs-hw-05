@@ -37,10 +37,15 @@ jobs:
 
       - name: Prepare artifact
         run: |
-          mkdir public
+          rm -rf public
+          mkdir -p public
           cp index.html public/index.html
           cp -r dist public/dist
+          echo "DEPLOY_TEST_123" > public/debug.txt
           touch public/.nojekyll
+
+          echo "---- public files ----"
+          find public -maxdepth 3 -type f -print    
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
